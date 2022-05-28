@@ -3,19 +3,30 @@ import './SignUp.css'
 import Navbar from '../../layout/Navbar/Navbar'
 import { useForm } from 'react-hook-form'
 import image from '../../Assets/pic.svg'
-// import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import * as actionCreators from '../../../redux/actions/AuthAction'
 import { useNavigate } from 'react-router-dom'
+import AuthService from '../../../services/API'
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         mode: "onTouched"
     });
     const navigate = useNavigate();
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const onSubmit = (data, e) => {
         e.preventDefault();
-        // dispatch(actionCreators.userEmail(data.email));
-        // dispatch(actionCreators.userPass(data.password));
+        dispatch(actionCreators.userEmail(data.email));
+        dispatch(actionCreators.userPass(data.password));
         localStorage.setItem("email", data.email);
+        let obj={
+            "email": data.email,
+        }
+        AuthService.Signup(obj)
+        .then((res)=>{
+            console.log(res);
+        }).catch((error)=>{
+            console.log(error);
+        })
         navigate("/otp");
     }
     const [toggle, setToggle] = useState(false);

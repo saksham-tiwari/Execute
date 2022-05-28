@@ -3,6 +3,9 @@ import Navbar from '../../layout/Navbar/Navbar'
 import image from '../../Assets/pic.svg'
 import './OTP.css'
 import OtpInput from 'react-otp-input';
+import AuthService from '../../../services/API'
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
 const Otp = () => {
     const [state, setState] = useState('');
     const [flag, setFlag] = useState(false);
@@ -10,6 +13,7 @@ const Otp = () => {
     const [seconds, setSeconds] = useState(0);
     const handleChange = (otp) => setState(otp);
     const x = localStorage.getItem("forgot");
+    const {email,pass} = useSelector((state)=>state.AuthReducer);
     const style = {
         width: "28vw",
         height: "12vh",
@@ -21,6 +25,7 @@ const Otp = () => {
     const handleClick = () => {
         setMinutes(1);
     }
+    const navigate = useNavigate();
     useEffect(() => {
         let myInterval = setInterval(() => {
             if (seconds > 0) {
@@ -42,8 +47,33 @@ const Otp = () => {
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        localStorage.removeItem("forgot");
-        console.log(state);
+        if(localStorage.getItem("forgot")==='1'){
+            localStorage.removeItem("forgot");
+            let obj={
+                "email":localStorage.getItem("emailj"),
+                "userOtp":state
+            }
+            AuthService.otp(obj)
+            .then((res)=>{
+            console.log(res);
+            navigate("/reset");
+            }).catch((e)=>{
+            console.log(e);
+            })
+        }else{
+            let obj={
+                "email":email,
+                "otp":state,
+                "password":pass,
+            }
+            AuthService.otp(obj)
+            .then((res)=>{
+            console.log(res);
+            navigate("/detail");
+            }).catch((e)=>{
+            console.log(e);
+            })
+        }
 }
   return (<>
         <div className='Signup-Page'>

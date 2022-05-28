@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import image from '../../Assets/pic.svg'
 import {useNavigate} from 'react-router-dom'
 import './Login.css'
+import AuthService from '../../../services/API'
 const Login = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         mode: "onTouched"
@@ -11,6 +12,22 @@ const Login = () => {
     const navigate = useNavigate();
     const onSubmit = (data, e) => {
         e.preventDefault();
+        let obj = {
+            "email":data.email,
+            "password":data.password,
+            "isStore": data.aopt === "store" ? false : true
+        }
+        AuthService.Login(obj)
+        .then((res)=>{
+            console.log(res);
+            if(res){
+                localStorage.setItem("access",res.data.access_token);
+                localStorage.setItem("access",res.data.refresh_token);
+                navigate("/");
+            }
+        }).catch((e)=>{
+            console.log(e);
+        })
     }
     const handleClick = () =>{
         navigate("/forgot");

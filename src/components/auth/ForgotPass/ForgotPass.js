@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import image from '../../Assets/pic.svg'
 import './ForgotPass.css'
 import {useNavigate} from 'react-router-dom'
+import AuthService from '../../../services/API'
 const Forgot = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         mode: "onTouched"
@@ -12,6 +13,18 @@ const Forgot = () => {
     const onSubmit = (data, e) => {
         e.preventDefault();
         localStorage.setItem("forgot",1);
+        let obj = {
+            "username":data.email
+        }
+        localStorage.setItem("emailj",data.email);
+        AuthService.forgot(obj)
+        .then((res)=>{
+            console.log(res);
+            navigate("/otp");
+        }).catch((e)=>{
+            console.log(e);
+        })
+
     }
   return (
     <div className='Signup-Page'>

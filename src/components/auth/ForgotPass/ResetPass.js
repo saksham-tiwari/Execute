@@ -3,13 +3,29 @@ import Navbar from '../../layout/Navbar/Navbar'
 import { useForm } from 'react-hook-form'
 import image from '../../Assets/pic.svg'
 import './ForgotPass.css'
+import AuthService from '../../../services/API'
+import { useSelector } from 'react-redux'
 const ResetPass = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         mode: "onTouched"
     });
+    const { pass } = useSelector((state) => state.AuthReducer);
     const onSubmit = (data, e) => {
         e.preventDefault();
-        
+        let obj = {
+            "username": localStorage.getItem("emailj"),
+            "password": data.passwordr1,
+            "name": null,
+            "mob": null,
+            "gender": null,
+            "role": null
+        }
+        AuthService.resetpass(obj)
+            .then((res) => {
+                console.log(res);
+            }).catch((e) => {
+                console.log(e);
+            })
     }
     const [toggle, setToggle] = useState(false);
     const [toggle1, setToggle1] = useState(false);
