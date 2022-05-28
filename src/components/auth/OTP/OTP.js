@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Navbar from '../../layout/Navbar/Navbar'
+import Navbar from '../../Layout/Navbar/Navbar'
 import image from '../../Assets/pic.svg'
 import './OTP.css'
 import OtpInput from 'react-otp-input';
