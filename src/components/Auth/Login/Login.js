@@ -23,6 +23,7 @@ const Login = () => {
             if(res){
                 localStorage.setItem("access",res.data.access_token);
                 localStorage.setItem("access",res.data.refresh_token);
+                localStorage.setItem("userid",res.data.userid);
                 navigate("/");
             }
         }).catch((e)=>{
