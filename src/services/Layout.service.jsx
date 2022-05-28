@@ -4,32 +4,45 @@ import authHeader from "./auth-header";
 
 
 class LayoutService{
-    async getNearby(latitude,longitude){
+    async getNearby(latti,long){
         return await axios
-        .post(Url+"getAllStores",{
-            latitude,longitude
-        },{
-            headers:authHeader()
+        .post(Url+"store/nearby",{
+            latti,long
         });
     }
     async addStoreDetails(name,counter,Address,ShopCounter,countertime,avgtime){
+        let userId = localStorage.getItem("userid")
         return await axios
-        .post(Url+"store/makestore/629272920a1ef475533e9989",{
+        .post(Url+"store/makestore/"+userId,{
             name,counter,Address,ShopCounter,countertime,avgtime
         })
     }
     async getSingle(id){
         return await axios
-        .get(Url+"getStoreDetails/"+id,{
-            headers:authHeader()
-        });
+        .get(Url+"store/details/"+id);
     }
-    async joinQueue(){
+    async joinQueue(shopid){
         // let username = localStorage.getItem("email")
+        let userId = localStorage.getItem("userid")
+        var today = new Date();
+        var time = parseInt(parseInt(today.getHours())*60 + parseInt(today.getMinutes()));
         return await axios
         .post(Url+"store/adduser",{
-            shopid:"629290c4b89d90f2ccc1b1f8",
-            userid:"629272d50a1ef475533e9994"
+            shopid,
+            userid:userId,
+            time
+        });
+    }
+    async leaveQueueStore(shopid,counter){
+        // let username = localStorage.getItem("email")
+        // let userId = localStorage.getItem("userid")
+        var today = new Date();
+        var time = parseInt(parseInt(today.getHours())*60 + parseInt(today.getMinutes()));
+        return await axios
+        .post(Url+"store/removeuser",{
+            shopid,
+            counter,
+            time
         });
     }
     async allQueues(id){

@@ -20,16 +20,22 @@ const StorePage = () => {
       lat: 0,
       long: 0
    });
-    let Details = {about:"",billingTime:0,counter:0,frm:9,id:0,latitude:"0",longitude:"0",name:"",peopleCount:0,to:6,waitingTime:0}
+
+   const [inQueue, setInQueue] = useState(false)
+    // let Details = {about:"",billingTime:0,counter:0,frm:9,id:0,latitude:"0",longitude:"0",name:"",peopleCount:0,to:6,waitingTime:0}
    let location = useLocation();
    let dispatch = useDispatch();
    useEffect(()=>{
      let id= location.pathname.split("/")[2]
-    //   dispatch(getSingle(id))
+      dispatch(getSingle(id))
    },[])
 
-//    let Details = useSelector((state)=>state.LayoutReducer).single
-//    console.log(Details);
+   
+
+
+   let Details = useSelector((state)=>state.LayoutReducer).single
+   console.log(Details);
+
   function getLocation() {
       if (navigator.geolocation) {
          navigator.geolocation.getCurrentPosition(showPosition);
@@ -131,12 +137,40 @@ const StorePage = () => {
     
     let navigate = useNavigate()
     const join = ()=>{
-      dispatch(joinQueue())
+      dispatch(joinQueue(location.pathname.split("/")[2]))
       .then(()=>{
         navigate("/")
       })
     }
+    let [arr, setArr] = useState([0])
+    let [bT, setBT] = useState(0)
+    const findWait = ()=>{
+        let a = new Array(Details.counter)
+        for(let i=0;i<Details.counter;i++){
+            a[i]=Details.ShopCounter[i]*Details.avgtime[i]
+        }
+        a.sort();
+      console.log(a);
+      setArr(a)
+    }
+
+    const checkQueue=()=>{
+        let user = localStorage.getItem("userid")
+        console.log(user, user.toString());
+        for(let i=0;i<Details.queue.length;i++){
+            if(Details.queue[i]._id===user.toString()){
+                setInQueue(true)
+                break
+            }
+        }
+    }
+    useEffect(()=>{
+        findWait()
+        let x = Details.avgtime.sort()
+        setBT(x[0])
+        checkQueue()
   
+     },[Details])
   return (
     <>
         <Navbar/>
@@ -160,7 +194,7 @@ const StorePage = () => {
                   <td style={{padding:"10px"}}>
                     <div>
                       <TimerIcon style={{position:"relative", color:"#192839", fontSize:"38px", display:"inline-block", top:"6px"}}/><span className={homeStyles.yellowCapsule} style={{margin:"0", position:"relative", bottom:"6px", padding:"2px 5px"}}>
-                      {Details.waitingTime?Details.waitingTime:0} min
+                      {arr[0]?arr[0]:0} min
                     </span>
                       <div style={{textAlign:"center", width:"100%"}}>Waiting time</div>
                     </div>
@@ -169,14 +203,14 @@ const StorePage = () => {
                 <tr>
                   <td style={{padding:"10px"}}>
                     <div>
-                      <img src={img2} alt="counters" className={homeStyles.icons}/><div className={homeStyles.roundNo}>{Details.peopleCount?Details.peopleCount:0}</div>
+                      <img src={img2} alt="counters" className={homeStyles.icons}/><div className={homeStyles.roundNo}>{Details.queue.length}</div>
                         <div style={{textAlign:"center", width:"100%"}}>Customers</div>
                     </div>
                   </td>
                   <td style={{padding:"10px"}}>
                     <div>
                     <img src={img3} alt="counters" className={homeStyles.icons}/><span className={homeStyles.yellowCapsule} style={{margin:"0", position:"relative", bottom:"10px", padding:"2px 5px"}}>
-                      {Details.billingTime?Details.billingTime:0} mins
+                      {bT} mins
                     </span>
                       <div style={{textAlign:"center", width:"100%"}}>Billing time</div>
                     </div>
@@ -201,8 +235,8 @@ const StorePage = () => {
         </tbody>
         </table>
 
-        <button className={homeStyles.enterButton} style={{width:"20%", marginLeft:"40%", marginTop:"10px"}} onClick={()=>join()}>
-          Join Queue
+        <button className={inQueue?homeStyles.leaveButton:homeStyles.enterButton} style={{width:"20%", marginLeft:"40%", marginTop:"10px"}} onClick={()=>join()}>
+          {inQueue?"Leave Queue":"Join Queue"}
         </button>
         <p style={{textAlign:"center", fontSize:"14px"}}>Ensure to be physically near the store.</p>
     </>

@@ -1,5 +1,5 @@
 
-const initialState = {nearby:[{about:"",billingTime:0,counter:0,frm:9,id:0,latitude:"0",longitude:"0",name:"",peopleCount:0,to:6,waitingTime:0}],store:{about:"",billingTime:0,counter:0,frm:9,id:0,latitude:"0",longitude:"0",name:"",peopleCount:0,to:6,waitingTime:0},single:{about:"",billingTime:0,counter:0,frm:9,id:0,latitude:"0",longitude:"0",name:"",peopleCount:0,to:6,waitingTime:0}};
+const initialState = {nearby:[{dist:0,shop:{_id:0,name:"",Address:"",counter:0,ShopCounter:[],avgtime:[],queue:[],latti:0,long:0}}],store:{_id:0,name:"",Address:"",counter:0,ShopCounter:[],avgtime:[],queue:[],latti:0,long:0},single:{_id:0,name:"",Address:"",counter:0,ShopCounter:[],avgtime:[],queue:[],latti:0,long:0}};
 
 const LayoutReducer = (state = initialState, action)=>{
     const {type, payload} = action;

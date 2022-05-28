@@ -1,7 +1,7 @@
 import LayoutService from "../../services/Layout.service";
 
-export const getNearby = (latitude,longitude)=>(dispatch)=>{
-    return LayoutService.getNearby(latitude,longitude)
+export const getNearby = (latti,long)=>(dispatch)=>{
+    return LayoutService.getNearby(latti,long)
     .then((res)=>{
         console.log(res);
         dispatch({
@@ -55,8 +55,8 @@ export const getSingle = (id)=>(dispatch)=>{
     })
 }
 
-export const joinQueue = ()=>(dispatch)=>{
-    return LayoutService.joinQueue()
+export const joinQueue = (shopid)=>(dispatch)=>{
+    return LayoutService.joinQueue(shopid)
     .then((res)=>{
         console.log(res);
         return Promise.resolve();

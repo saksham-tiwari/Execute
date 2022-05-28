@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "../Homepage.module.css"
 import img1 from "../../../Assets/img1.png"
 import img2 from "../../../Assets/img2.png"
@@ -9,11 +9,39 @@ import { useNavigate } from 'react-router-dom';
 const Card = (props) => {
     let navigate = useNavigate();
     console.log(props)
+    // let arr=[0];
+    let [arr, setArr] = useState([0])
+   const [inQueue, setInQueue] = useState(false)
+
     // let dispatch = useDispatch();
     const open = (id)=>{
         // dispatch(getSingle(id))
         navigate("/store/"+id);
     }
+    useEffect(()=>{
+      findWait()
+      checkQueue()
+    },[props])
+    const findWait = ()=>{
+      let a = new Array(props.n.counter)
+      for(let i=0;i<props.n.counter;i++){
+        a[i]=props.n.ShopCounter[i]*props.n.avgtime[i]
+        // setArr(arr=>[...arr,props.n.ShopCounter[i]*props.n.avgtime[i]])
+      }
+      a.sort();
+      console.log(a);
+      setArr(a)
+    }
+    const checkQueue=()=>{
+      let user = localStorage.getItem("userid")
+      console.log(user, user.toString());
+      for(let i=0;i<props.n.queue.length;i++){
+          if(props.n.queue[i]._id===user.toString()){
+              setInQueue(true)
+              break
+          }
+      }
+  }
   return (
     <div className={styles.card}>
         <h1 className={styles.head}>{props.n.name}</h1>
@@ -23,7 +51,7 @@ const Card = (props) => {
                 <div style={{textAlign:"center", width:"100%"}}>Counters</div>
             </div>
             <div>
-              <img src={img2} alt="counters" className={styles.icons}/><div className={styles.roundNo}>{props.n.peopleCount}</div>
+              <img src={img2} alt="counters" className={styles.icons}/><div className={styles.roundNo}>{props.n.queue.length}</div>
                 <div style={{textAlign:"center", width:"100%"}}>Customers</div>
             </div>
         </div>
@@ -34,10 +62,10 @@ const Card = (props) => {
           <TimerIcon fontSize='small' style={{position:"relative",top:"6px", color:"#192839"}}/> Waiting Time
         </div>
         <div className={styles.yellowCapsule}>
-          {props.n.waitingTime}
+          {arr[0]}
         </div>
-        <button className={styles.enterButton} onClick={()=>open(props.n.id)}>
-          Enter Queue
+        <button className={inQueue?styles.leaveButton:styles.enterButton} onClick={()=>open(props.n._id)}>
+        {inQueue?"Leave Queue":"Join Queue"}
         </button>
     </div>
   )
