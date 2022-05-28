@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import './Detail.css'
-import Navbar from '../../layout/Navbar/Navbar'
+import Navbar from '../../Layout/Navbar/Navbar'
 import { useForm } from 'react-hook-form'
 import photo1 from '../../Assets/customer.svg'
 import photo2 from '../../Assets/store.svg'

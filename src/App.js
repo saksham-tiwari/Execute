@@ -1,12 +1,13 @@
 import React from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
-import SignUp from './components/auth/SignUp/SignUp';
-import Login from './components/auth/Login/Login';
-import Otp from './components/auth/OTP/OTP';
-import Forgot from './components/auth/ForgotPass/ForgotPass';
-import ResetPass from './components/auth/ForgotPass/ResetPass';
-import Details from './components/auth/Detail/Detail';
-import QrScanner from './components/layout/QR-Code/QR-Scan';
+import SignUp from './components/Auth/SignUp/SignUp';
+import Login from './components/Auth/Login/Login';
+import Otp from './components/Auth/OTP/OTP';
+import Forgot from './components/Auth/ForgotPass/ForgotPass';
+import ResetPass from './components/Auth/ForgotPass/ResetPass';
+import Details from './components/Auth/Detail/Detail';
+import QrScanner from './components/Layout/QR-Code/QR-Scan';
+import HomePage from './components/Layout/Homepage/HomePage';
 function App() {
   return ( <>
        <Routes>
