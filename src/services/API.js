@@ -12,16 +12,16 @@ class AuthServices {
         return axios.post(url + "auth/login", data)
     }
     forgot(data) {
-        return axios.post(url + "signup/forgot", data)
+        return axios.post(url + "auth/forgot", data)
     }
     otp(data) {
         return axios.post(url + 'auth/otpVerification', data)
     }
     resendotp(data) {
-        return axios.post(url + 'signup/resend', data)
+        return axios.post(url + 'auth/resend', data)
     }
     resetpass(data) {
-        return axios.post(url + 'signup/setPassword', data)
+        return axios.post(url + 'zuth/setPassword', data)
     }
     Details(data) {
         console.log(data);
