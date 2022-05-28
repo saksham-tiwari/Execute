@@ -1,5 +1,5 @@
 import React,{ useState,useEffect } from 'react'
-import Navbar from '../../Layout/Navbar/Navbar1'
+import Navbar from '../../Layout/Navbar/Navbar'
 import { useForm } from 'react-hook-form'
 import image from '../../Assets/pic.svg'
 import './ForgotPass.css'

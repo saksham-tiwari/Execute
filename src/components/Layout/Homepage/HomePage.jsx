@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from 'react'
-import Navbar from '../Navbar/Navbar1';
+import Navbar from '../Navbar/Navbar';
 import styles from "./Homepage.module.css"
 import Card from './Card/Card';
 import ListElement from './ListElement';
