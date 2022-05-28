@@ -12,8 +12,8 @@ import TimerIcon from '@mui/icons-material/Timer';
 import { useNavigate } from 'react-router-dom'
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useLocation } from 'react-router-dom'
-// import { useDispatch, useSelector } from 'react-redux'
-// import { getSingle, joinQueue } from '../../../redux/actions/LayoutAction'
+import { useDispatch, useSelector } from 'react-redux'
+import { getSingle, joinQueue } from '../../../redux/actions/LayoutAction'
 
 const StorePage = () => {
    const [loc,setLoc]= useState({
@@ -22,7 +22,7 @@ const StorePage = () => {
    });
     let Details = {about:"",billingTime:0,counter:0,frm:9,id:0,latitude:"0",longitude:"0",name:"",peopleCount:0,to:6,waitingTime:0}
    let location = useLocation();
-//    let dispatch = useDispatch();
+   let dispatch = useDispatch();
    useEffect(()=>{
      let id= location.pathname.split("/")[2]
     //   dispatch(getSingle(id))
@@ -131,10 +131,10 @@ const StorePage = () => {
     
     let navigate = useNavigate()
     const join = ()=>{
-    //   dispatch(joinQueue(Details.id))
-    //   .then(()=>{
-    //     navigate("/")
-    //   })
+      dispatch(joinQueue())
+      .then(()=>{
+        navigate("/")
+      })
     }
   
   return (
