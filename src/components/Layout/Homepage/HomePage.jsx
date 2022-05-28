@@ -36,9 +36,9 @@ function getLocation() {
     getLocation()
     console.log(loc.lat.toString(),loc.long.toString())
     // dispatch(getNearby(loc.lat.toString(),loc.long.toString()))
-  },[])
+  },[navigator. geolocation])
 
-  const nearby = useState(
+  const [nearby,setNearby] = useState(
       [
         {about:"",billingTime:0,counter:0,frm:9,id:0,latitude:"0",longitude:"0",name:"Hey",peopleCount:0,to:6,waitingTime:0},
         {about:"",billingTime:0,counter:0,frm:9,id:0,latitude:"0",longitude:"0",name:"Store 2",peopleCount:0,to:6,waitingTime:0},
