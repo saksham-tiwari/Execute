@@ -9,12 +9,16 @@ import Details from './components/Auth/Detail/Detail';
 import QrScanner from './components/Layout/QR-Code/QR-Scan';
 import HomePage from './components/Layout/Homepage/HomePage';
 import StorePage from './components/Layout/StorePage/StorePage';
+import CreateStore from './components/Layout/CreateStore/CreateStore';
+import ViewQueue from './components/Layout/ViewQueue/ViewQueue';
 function App() {
   return ( <>
        <Routes>
          {/* Auth Routes */}
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/store/:id" element={<StorePage/>}/>
+        <Route exact path="/create-store" element={<CreateStore/>}/>
+        <Route exact path="/view-queue/id" element={<ViewQueue/>}/>
         <Route exact path="/signup" element={<SignUp />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/otp" element={<Otp />} />

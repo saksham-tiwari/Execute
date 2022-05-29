@@ -1,0 +1,24 @@
+.viewFlex{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.viewFlex>div{
+    width: 30%;
+}
+
+.removeBtn{
+    display: block;
+    background: #FF8898;
+    box-shadow: 0px 4px 15px #FF8898;
+    border-radius: 15px;
+    border: none;
+    padding: 4px 12px;
+    width: 50%;
+    text-align: center;
+    margin-top: 4px;
+    font-size: 20px;
+    /* font-weight: 600; */
+    cursor: pointer;
+    margin-left: 25%;
+}

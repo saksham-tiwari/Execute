@@ -78,6 +78,9 @@ const CreateStore = () => {
                 <button className={homeStyles.enterButton} style={{width:"50%", marginLeft:"15%", marginTop:"10px"}} onClick={()=>funSub()}>
                     Update
                 </button>
+                <button className={homeStyles.enterButton} style={{width:"50%", marginLeft:"15%", marginTop:"10px"}} onClick={()=>navigate("/view-queue/id")}>
+                    View queue
+                </button>
             </div>
             <div className={styles.box}>
                 <h1>Store Preview</h1>

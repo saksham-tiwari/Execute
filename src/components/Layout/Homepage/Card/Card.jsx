@@ -8,16 +8,20 @@ import { useNavigate } from 'react-router-dom';
 
 const Card = (props) => {
     let navigate = useNavigate();
-    console.log(props)
+    // console.log(props)
     // let arr=[0];
     let [arr, setArr] = useState([0])
    const [inQueue, setInQueue] = useState(false)
+
+   const [timer,setTimer] = useState(0)
 
     // let dispatch = useDispatch();
     const open = (id)=>{
         // dispatch(getSingle(id))
         navigate("/store/"+id);
     }
+
+    
     useEffect(()=>{
       findWait()
       checkQueue()
@@ -31,6 +35,7 @@ const Card = (props) => {
       a.sort();
       console.log(a);
       setArr(a)
+      setTimer(a[0]*60)
     }
     const checkQueue=()=>{
       let user = localStorage.getItem("userid")
@@ -42,6 +47,11 @@ const Card = (props) => {
           }
       }
   }
+  useEffect(()=>{
+    setInterval(()=>{
+      setTimer(timer=>timer-1)
+    },1000)
+  },[])
   return (
     <div className={styles.card}>
         <h1 className={styles.head}>{props.n.name}</h1>
@@ -62,7 +72,12 @@ const Card = (props) => {
           <TimerIcon fontSize='small' style={{position:"relative",top:"6px", color:"#192839"}}/> Waiting Time
         </div>
         <div className={styles.yellowCapsule}>
-          {arr[0]}
+          {/* {arr[0]} */}
+          {timer>60?<p>
+            {Math.floor(timer/60)} mins:{Math.floor(timer%60)} secs
+          </p>:<p>
+          {timer}mins
+          </p> }
         </div>
         <button className={inQueue?styles.leaveButton:styles.enterButton} onClick={()=>open(props.n._id)}>
         {inQueue?"Leave Queue":"Join Queue"}
