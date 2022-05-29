@@ -43,8 +43,7 @@ const Details = () => {
             AuthService.Details(obj)
             .then((res)=>{
                 console.log(res);
-                localStorage.setItem("access",res.data.access_token);
-                localStorage.setItem("refresh",res.data.refresh_token);
+                localStorage.setItem("userid",res.data._id);
                 navigate("/")
             }).catch((e)=>{
                 console.log(e);
