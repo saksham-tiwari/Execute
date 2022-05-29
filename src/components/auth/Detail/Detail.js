@@ -44,7 +44,11 @@ const Details = () => {
             .then((res)=>{
                 console.log(res);
                 localStorage.setItem("userid",res.data._id);
-                navigate("/")
+                if(localStorage.getItem("Type")==="store"){
+                    navigate("/create-store");
+                }else{
+                    navigate("/");
+                }
             }).catch((e)=>{
                 console.log(e);
             })

@@ -1,2 +1,2 @@
-const Url ="http://192.168.193.139:3000/"
+const Url ="http://44.206.0.172:8000/"
 export default Url;
