@@ -12,6 +12,7 @@ const Login = () => {
     const navigate = useNavigate();
     const onSubmit = (data, e) => {
         e.preventDefault();
+        localStorage.setItem("Type",data.aopt);
         let obj = {
             "email":data.email,
             "password":data.password,
@@ -21,8 +22,6 @@ const Login = () => {
         .then((res)=>{
             console.log(res);
             if(res){
-                localStorage.setItem("access",res.data.access_token);
-                localStorage.setItem("access",res.data.refresh_token);
                 localStorage.setItem("userid",res.data._id);
                 navigate("/");
             }
