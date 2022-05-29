@@ -45,11 +45,10 @@ class LayoutService{
             time
         });
     }
-    async allQueues(id){
+    async allQueues(){
+        let userId = localStorage.getItem("userid")
         return await axios
-        .get(Url+"getStoreDetails/"+id,{
-            headers:authHeader()
-        });
+        .get(Url+"store/joinedqueue",{userid:userId});
     }
 
 }

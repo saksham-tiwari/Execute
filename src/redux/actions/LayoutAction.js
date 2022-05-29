@@ -66,3 +66,17 @@ export const joinQueue = (shopid)=>(dispatch)=>{
         return Promise.reject();
     })
 }
+export const allQueues = ()=>(dispatch)=>{
+    return LayoutService.allQueues()
+    .then((res)=>{
+        dispatch({
+            type:"GetAllQueues",
+            payload:res.data
+        })
+        return Promise.resolve();
+    })
+    .catch((err)=>{
+        console.log(err);
+        return Promise.reject();
+    })
+}

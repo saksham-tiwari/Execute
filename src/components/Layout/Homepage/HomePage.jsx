@@ -5,7 +5,7 @@ import Card from './Card/Card';
 import ListElement from './ListElement';
 import SearchBar from '../SearchBar/SearchBar';
 import { useDispatch } from 'react-redux';
-import { getNearby } from '../../../redux/actions/LayoutAction';
+import { allQueues, getNearby } from '../../../redux/actions/LayoutAction';
 import { useSelector } from 'react-redux/es/exports';
 
 const HomePage = () => {
@@ -37,6 +37,10 @@ function getLocation() {
     console.log(parseFloat(loc.lat),parseFloat(loc.long))
     dispatch(getNearby(parseFloat(loc.lat),parseFloat(loc.long)))
   },[navigator. geolocation])
+
+  useEffect(()=>{
+    dispatch(allQueues())
+  },[])
 
   return (
     <>

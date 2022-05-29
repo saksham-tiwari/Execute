@@ -218,12 +218,12 @@ const StorePage = () => {
                 </tr>
               </tbody>
             </table>
-            <AccessTimeIcon fontSize='large' style={{position:"relative", top:"10px"}}/> Open {Details.from?Details.from:9}.00AM-{Details.to?Details.to:6}
+            <AccessTimeIcon fontSize='large' style={{position:"relative", top:"10px"}}/> Open {Details.from?Details.from:9}.00AM-{Details.to?Details.to:6}.00PM
             <div>
             <br></br>
             <br></br>
-              <h1>About Us</h1>
-              <p style={{width:"90%"}}>{Details.about?Details.about:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum efficitur feugiat ex sed gravida. Proin eu orci varius, dictum erat ac, ullamcorper arcu. Aliquam erat volutpat.Nam sagittis leo "} </p>
+              <h1>Address</h1>
+              <p style={{width:"90%"}}>{Details.Address?Details.Address:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum efficitur feugiat ex sed gravida. Proin eu orci varius, dictum erat ac, ullamcorper arcu. Aliquam erat volutpat.Nam sagittis leo "} </p>
             </div>
           </td>
           
