@@ -22,13 +22,13 @@ export const getNearby = (latti,long)=>(dispatch)=>{
 //         payload:data
 //     }
 // }
-export const addStoreDetails = (name,counter,Address,ShopCounter,countertime,avgtime)=>(dispatch)=>{
-    return LayoutService.addStoreDetails(name,counter,Address,ShopCounter,countertime,avgtime)
+export const addStoreDetails = (name,counter,Address,ShopCounter,countertime,avgtime,latti,long)=>(dispatch)=>{
+    return LayoutService.addStoreDetails(name,counter,Address,ShopCounter,countertime,avgtime,latti,long)
     .then(res=>{
         console.log(res);
         dispatch({
             type:"addDetails",
-            payload:{name,counter,Address,ShopCounter,countertime,avgtime}
+            payload:{name,counter,Address,ShopCounter,countertime,avgtime,latti,long}
         })
         return Promise.resolve();
     })
@@ -78,5 +78,15 @@ export const allQueues = ()=>(dispatch)=>{
     .catch((err)=>{
         console.log(err);
         return Promise.reject();
+    })
+}
+
+export const checkStore = ()=>dispatch=>{
+    return LayoutService.checkStore()
+    .then((res)=>{
+        return Promise.resolve(res)
+    })
+    .catch((err)=>{
+        return Promise.reject(err)
     })
 }

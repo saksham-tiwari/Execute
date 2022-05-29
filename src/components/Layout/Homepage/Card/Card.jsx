@@ -73,10 +73,10 @@ const Card = (props) => {
         </div>
         <div className={styles.yellowCapsule}>
           {/* {arr[0]} */}
-          {timer>60?<p>
+          {timer>0?<p>
             {Math.floor(timer/60)} mins:{Math.floor(timer%60)} secs
           </p>:<p>
-          {timer}mins
+          0 mins
           </p> }
         </div>
         <button className={inQueue?styles.leaveButton:styles.enterButton} onClick={()=>open(props.n._id)}>

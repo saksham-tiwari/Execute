@@ -10,11 +10,11 @@ class LayoutService{
             latti,long
         });
     }
-    async addStoreDetails(name,counter,Address,ShopCounter,countertime,avgtime){
+    async addStoreDetails(name,counter,Address,ShopCounter,countertime,avgtime,latti,long){
         let userId = localStorage.getItem("userid")
         return await axios
         .post(Url+"store/makestore/"+userId,{
-            name,counter,Address,ShopCounter,countertime,avgtime
+            name,counter,Address,ShopCounter,countertime,avgtime,latti,long
         })
     }
     async getSingle(id){
@@ -48,7 +48,13 @@ class LayoutService{
     async allQueues(){
         let userId = localStorage.getItem("userid")
         return await axios
-        .get(Url+"store/joinedqueue",{userid:userId});
+        .get(Url+"store/joinedqjueue",{userid:userId});
+    }
+
+    async checkStore(){
+        let userId = localStorage.getItem("userid")
+        return await axios
+        .post(Url+"store/checkStore",{userid:userId});
     }
 
 }

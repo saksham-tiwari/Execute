@@ -52,7 +52,7 @@ const CreateStore = () => {
         console.log(a);
         console.log(strName,parseInt(billTime),parseInt(from),parseInt(to),parseInt(ctr),loc.lat.toString(),loc.long.toString(),about);
         
-        dispatch(addStoreDetails(strName,parseInt(ctr),about,a,a,a))
+        dispatch(addStoreDetails(strName,parseInt(ctr),about,a,a,a,parseFloat(loc.lat),parseFloat(loc.long)))
     }
 
   return (
@@ -129,7 +129,7 @@ const CreateStore = () => {
             <AccessTimeIcon fontSize='large' style={{position:"relative", top:"10px"}}/> Open {from?from:"9"}.00AM-{to?to:"6"}.00PM
 
                     <div>
-                    <h1>About Us</h1>
+                    <h1>Address</h1>
                     <p style={{width:"90%"}}>{about?about:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum efficitur feugiat ex sed gravida. Proin eu orci varius, dictum erat ac, ullamcorper arcu. Aliquam erat volutpat.Nam sagittis leo ut nibh vehicula, in venenatis velit laoreet. "} </p>
                     </div>
                 </td>
